@@ -1,21 +1,20 @@
-import { useTodoList } from '../hooks/todo'
-import TodoInput from '../components/TodoInput';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import { List } from '@material-ui/core';
-import TodoItem from '../components/TodoItem';
+import { useTodoList } from "../hooks/todo";
+import TodoInput from "../components/TodoInput";
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import { List } from "@material-ui/core";
+import TodoItem from "../components/TodoItem";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexGrow: 1,
-      margin: 20
+      margin: 20,
     },
     item: {
-      margin: 10
+      margin: 10,
     },
-  }),
+  })
 );
 
 const HomePage = () => {
@@ -31,30 +30,36 @@ const HomePage = () => {
         alignItems="center"
       >
         <Grid item className={classes.item}>
-          <TodoInput label="TODO" defaultValue="今晚我想來點..." onSubmit={title => addTodoItem(title, 'TODO')} />
+          <TodoInput
+            label="TODO"
+            placeholder="add TODO item..."
+            onSubmit={(title) => addTodoItem(title, "TODO")}
+          />
         </Grid>
         <Grid item className={classes.item}>
-          <TodoInput label="DOING" defaultValue="今晚我正在..." onSubmit={title => addTodoItem(title, 'DOING')} />
+          <TodoInput
+            label="DOING"
+            placeholder="add DOING item..."
+            onSubmit={(title) => addTodoItem(title, "DOING")}
+          />
         </Grid>
         <Grid item className={classes.item}>
           <List>
-            {
-              todoList.map( (todoItem, idx) => {
-                return (
-                  <TodoItem 
-                    key={idx} 
-                    status={todoItem.status}
-                    title={todoItem.title}
-                    onRemove={ () => removeTodoItem(todoItem.id) } 
-                  />
-                )
-              })
-            }
+            {todoList.map((todoItem) => {
+              return (
+                <TodoItem
+                  key={todoItem.id}
+                  status={todoItem.status}
+                  title={todoItem.title}
+                  onRemove={() => removeTodoItem(todoItem.id)}
+                />
+              );
+            })}
           </List>
         </Grid>
       </Grid>
     </div>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;
